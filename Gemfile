@@ -71,6 +71,8 @@ gem 'pry-byebug'
 gem 'rb-readline'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
 
 group :production do
   gem 'pg', '0.20.0'
