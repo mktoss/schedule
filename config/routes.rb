@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'events#index'
+  root 'users#show'
 
-  get 'application/home'
-
+  resource  :users,  only: [:show]
   resources :events, only: [:index]
 end

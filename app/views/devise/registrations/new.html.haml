@@ -1,21 +1,17 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
+.mx-auto.col-md-3.mt-5
+  %h2 Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    = f.label :email, class: 'mt-3'
+    = f.email_field :email, autocomplete: "email",autofocus: true, class: 'form-control'
+    = f.label :password, class: 'mt-3'
     - if @minimum_password_length
       %em
         (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+    = f.password_field :password, autocomplete: "new-password", class: 'form-control'
+    = f.label :password_confirmation, class: 'mt-3'
+    = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
+    = f.label :name, class: 'mt-5'
+    = f.text_field :name, autocomplete: "name", class: 'form-control'
+    = f.submit "Sign up", class: 'btn btn-lg btn-primary btn-block mt-4'
+  = render "devise/shared/links"
