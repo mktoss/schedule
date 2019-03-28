@@ -1,1 +1,6 @@
-#calendar
+= render 'share/navbar', events: @events, project: @project
+.row.mt-3.mx-1
+  .col-md-8
+    #calendar
+  .col-md-4
+    = render 'share/event_editer', event: @event

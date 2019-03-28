@@ -1,0 +1,6 @@
+.mx-auto.col-md-3.mt-5
+  = form_for project do |f|
+    = f.text_field :name, placeholder: 'プロジェクト名を入力してください', class: 'form-control mb-1'
+    = text_field_tag :keyword, '', class: 'form-control mb-1'
+    = f.submit '決定', class: 'btn btn-primary btn-block mb-1'
+  = link_to 'キャンセル', root_path, class: 'btn btn-secondary btn-block mb-1'

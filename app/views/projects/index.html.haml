@@ -1,0 +1,17 @@
+.row.mx-auto.mt-3
+  %ul.col-md-3
+    %li.mb-1
+      = current_user.name
+    %li.mb-1
+      = link_to "プロジェクト作成", new_project_path
+    %li.mb-1
+      = link_to "ログアウト", destroy_user_session_path, method: :delete
+
+  %ul.col-md-9
+    %li.mb-1
+      プロジェクト一覧
+    - current_user.projects.each do |project|
+      %li.row.mb-1
+        = link_to "#{project.name}", project_events_path(project), class: 'col-md-3 my-auto text-body'
+        = link_to "編集", edit_project_path(project), class: 'btn-sm btn-secondary'
+        = link_to "削除", project_path(project), method: :delete, class: 'btn-sm btn-danger ml-1'
