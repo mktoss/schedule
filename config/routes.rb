@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'users#show'
+  root 'projects#index'
 
-  resource  :users,  only: [:show]
-  resources :events, only: [:index]
+  resources :users, only: [:index]
+
+  resources :projects, except: :show do
+    resources :events, only: [:index]
+  end
 end
