@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
 
   resources :projects, except: :show do
-    resources :events, only: [:index]
+    resources :events, except: [:new, :edit]
   end
 end
