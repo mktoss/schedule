@@ -14,4 +14,4 @@
       %li.row.mb-1
         = link_to "#{project.name}", project_events_path(project), class: 'col-md-3 my-auto text-body'
         = link_to "編集", edit_project_path(project), class: 'btn-sm btn-secondary'
-        = link_to "削除", project_path(project), method: :delete, class: 'btn-sm btn-danger ml-1'
+        = link_to "削除", project_path(project), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn-sm btn-danger ml-1'

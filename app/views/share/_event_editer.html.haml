@@ -1,2 +1,55 @@
-イベント
+= form_for [project, event] do |f|
+
+  = render 'share/error_messages', instance: event
+
+  .row.mb-2
+    .col-md-2.my-auto
+      = f.label :title
+    .col-md-7
+      = f.text_field :title, class: 'form-control'
+    .col-md-3.checkbox.my-auto
+      = f.check_box :all_day, {}, "true", "false"
+      = f.label :all_day
+
+  .row.mb-2
+    .col-md-2
+      = f.label :start
+    .col-md-10
+      = f.datetime_select :start, minute_step: 10
+
+  .row.mb-2
+    .col-md-2
+      = f.label :end
+    .col-md-10
+      = f.datetime_select :end, minute_step: 10
+
+  .row.mb-2
+    .col-md-2.my-auto
+      = f.label :addr
+    .col-md-10
+      = f.text_field :address, class: 'form-control'
+
+  .row.mb-2
+    .col-md-2
+      = f.label :color
+    .col-md-10
+      - Event.colors.keys.each do |key|
+        .col-md-12.mb-1{style: "background-color: #{key};"}
+          = f.radio_button :color, key
+  .row.mb-2
+    .col-md-2
+      = f.label :memo
+    .col-md-10
+      = f.text_area :memo, class: 'form-control'
+
+  .row.mb-2
+    .col-md-12
+      - unless controller.action_name == "show" || controller.action_name == "update"
+        .float-right
+          = f.submit "登録", class: 'btn btn-primary'
+      - else
+        = link_to "削除", project_event_path(project, event), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-danger"
+        .float-right
+          = link_to "キャンセル", project_events_path(project), class: 'btn btn-outline-secondary'
+          = f.submit "更新", class: 'btn btn-secondary'
 
