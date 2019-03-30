@@ -8,7 +8,7 @@
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       %li.nav-item.active
-        Member:
+        = "Member(#{project.users.count})"
         - project.users.each do |user|
           = user.name
     %form.form-inline.my-2.my-lg-0
