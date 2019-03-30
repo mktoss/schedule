@@ -1,5 +1,8 @@
-.mx-auto.col-md-3.mt-5
+.mx-auto.col-md-4.mt-5
   = form_for project do |f|
+
+    = render 'share/error_messages', instance: project
+
     = f.text_field :name, placeholder: 'プロジェクト名を入力してください', class: 'form-control mb-1'
     = text_field_tag :keyword, '', class: 'form-control mb-1'
     = f.submit '決定', class: 'btn btn-primary btn-block mb-1'

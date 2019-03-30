@@ -1,0 +1,4 @@
+.row.mb-2
+  - instance.errors.full_messages.each do |message|
+    .col-md-12
+      .alert.alert-danger.alert-dismissible= message
