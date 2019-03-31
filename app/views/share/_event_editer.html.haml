@@ -1,5 +1,18 @@
 = form_for [project, event] do |f|
 
+  .row.mb-2
+    .col-md-12
+      - unless controller.action_name == "show" || controller.action_name == "update"
+        .float-right
+          = f.submit "登録", class: 'btn btn-primary'
+      - else
+        = link_to "削除", project_event_path(project, event), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-danger"
+        .float-right
+          = link_to "キャンセル", project_events_path(project), class: 'btn btn-outline-secondary'
+          = f.submit "更新", class: 'btn btn-secondary'
+
+  .border-bottom.mb-2
+
   = render 'share/error_messages', instance: event
 
   .row.mb-2
@@ -29,27 +42,21 @@
     .col-md-10
       = f.text_field :address, class: 'form-control'
 
+  - if event.address && event.address != ""
+    .row.mb-2{ style: "height: 29vh;" }
+      .col
+        %iframe{ src: "https://maps.google.co.jp/maps?output=embed&t=m&hl=ja&z=15&q=#{event.address}", frameborder: "0", scrolling: "no", width: "100%", height: "100%" }
+
   .row.mb-2
     .col-md-2
       = f.label :color
     .col-md-10
       - Event.colors.keys.each do |key|
-        .col-md-12.mb-1{style: "background-color: #{key};"}
+        .col-md-12.mb-1{ style: "background-color: #{key};" }
           = f.radio_button :color, key
   .row.mb-2
     .col-md-2
       = f.label :memo
     .col-md-10
       = f.text_area :memo, class: 'form-control'
-
-  .row.mb-2
-    .col-md-12
-      - unless controller.action_name == "show" || controller.action_name == "update"
-        .float-right
-          = f.submit "登録", class: 'btn btn-primary'
-      - else
-        = link_to "削除", project_event_path(project, event), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-danger"
-        .float-right
-          = link_to "キャンセル", project_events_path(project), class: 'btn btn-outline-secondary'
-          = f.submit "更新", class: 'btn btn-secondary'
 
