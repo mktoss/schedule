@@ -1,9 +1,29 @@
-.mx-auto.col-md-4.mt-5
-  = form_for project do |f|
+.mx-auto.col-md-6.mt-5
+  = form_for project, html: { id: "project-form" } do |f|
 
     = render 'share/error_messages', instance: project
 
-    = f.text_field :name, placeholder: 'プロジェクト名を入力してください', class: 'form-control mb-1'
-    = text_field_tag :keyword, '', class: 'form-control mb-1'
-    = f.submit '決定', class: 'btn btn-primary btn-block mb-1'
-  = link_to 'キャンセル', root_path, class: 'btn btn-secondary btn-block mb-1'
+    .row
+      .col-md-6
+        = text_field_tag :keyword, '', placeholder: '追加したいユーザー名を入力してください', class: 'form-control', id: 'user-search'
+        %ul#user-list
+
+      .col-md-6
+        = f.text_field :name, placeholder: 'プロジェクト名を入力してください', class: 'form-control'
+        %ul#project-member
+          - project.users.each do |user|
+            %li.border.rounded.mt-1
+              %input{ name: "project[user_ids][]", type: "hidden", value: "#{user.id}" }
+              .row
+                .col.ml-3{ style: "line-height: 38px;" }
+                  = user.name
+                .col
+                  - unless user == current_user
+                    .btn.btn-outline-danger.float-right{ id: "user-remove" }
+                      除外
+
+        .row
+          .col-md-6
+            = link_to 'キャンセル', root_path, class: 'btn btn-outline-secondary btn-block mb-3'
+          .col-md-6
+            = f.submit '決定', class: 'btn btn-primary btn-block'
