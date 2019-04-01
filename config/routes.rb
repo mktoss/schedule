@@ -7,5 +7,10 @@ Rails.application.routes.draw do
 
   resources :projects, except: :show do
     resources :events, except: [:new, :edit]
+    resource :todos, only: [:edit, :update] do
+      collection do
+        get :executed
+      end
+    end
   end
 end
