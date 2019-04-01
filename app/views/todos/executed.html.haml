@@ -1,0 +1,15 @@
+.container
+  %h3 実行済みリスト
+  = form_tag project_todos_path(@project), method: :patch do
+
+    - @events.each do |event|
+      = fields_for "events[]", event do |fi|
+        .col.pt-1.rounded.border-bottom{ style: "height:38px; background-color: #{event.color};"}
+          = fi.check_box :todo, {}, "true", "false"
+          = link_to project_event_path(@project, event), class: "ml-1 text-body" do
+            = event.title
+
+    .mt-1
+      = submit_tag "未実行に戻す", class: 'btn btn-outline-danger'
+      = link_to "カレンダーに戻る", project_events_path(@project), class: 'btn btn-outline-secondary'
+      = link_to "未実行リストに戻る", edit_project_todos_path(@project), class: 'btn btn-outline-primary'
