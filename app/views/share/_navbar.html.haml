@@ -1,6 +1,5 @@
 %nav.navbar.navbar-expand-md.navbar-light.bg-light
-  = link_to root_path do
-    home
+  = link_to "HOME", root_path
   %a.navbar-brand.ml-3
     = project.name
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
@@ -12,5 +11,6 @@
         - project.users.each do |user|
           = user.name
     %form.form-inline.my-2.my-lg-0
+      = link_to "TODO", edit_project_todos_path(project), class: "btn btn-outline-info mr-2"
       %input.form-control.mr-sm-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
       %button.btn.btn-outline-success.my-2.my-sm-0{type: "submit"} Search
