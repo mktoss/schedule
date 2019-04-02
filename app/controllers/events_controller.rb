@@ -24,7 +24,10 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to project_events_path(@project)
+      respond_to do |format|
+        format.html { redirect_to project_events_path(@project) }
+        format.json
+      end
     else
       set_event
       @events = @project.events
