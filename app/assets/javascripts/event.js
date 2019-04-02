@@ -13,9 +13,11 @@ $(document).on('turbolinks:load', function() {
     editable: true,
     eventLimit: true,
     events: location.href,
+
     eventClick: function(event) {
       location.href = `/projects/${event.project_id}/events/${event.id}`
     },
+
     eventResize: function(event) {
       var end = []
       end.push(event.end._d.getUTCFullYear());
@@ -37,6 +39,7 @@ $(document).on('turbolinks:load', function() {
         dataType: 'json'
       })
     },
+
     eventDrop: function(event) {
       var start = []
       start.push(event.start._d.getUTCFullYear());
@@ -56,8 +59,9 @@ $(document).on('turbolinks:load', function() {
       }
       var data = {
         event: {
-          start: start_time,
-          end: end_time,
+          all_day : event.allDay,
+          start:    start_time,
+          end:      end_time,
         }
       };
 
