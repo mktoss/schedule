@@ -1,10 +1,4 @@
 $(document).on('turbolinks:load', function() {
-
-  function get_month(month) {
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    return months.indexOf(month) + 1
-  }
-
   $('#calendar').fullCalendar({
     header: {
       left:'title',
@@ -23,11 +17,21 @@ $(document).on('turbolinks:load', function() {
       location.href = `/projects/${event.project_id}/events/${event.id}`
     },
     eventDrop: function(event) {
-      var start = String(event.start._d).split(' ');
-      var start_time = start[3] + '-' + get_month(start[1]) + '-' + start[2] + ' ' + start[4];
+      var start = []
+      start.push(event.start._d.getUTCFullYear());
+      start.push(event.start._d.getUTCMonth() + 1);
+      start.push(event.start._d.getUTCDate());
+      start.push(event.start._d.getUTCHours());
+      start.push(event.start._d.getUTCMinutes());
+      var start_time = start[0] + '-' + start[1] + '-' + start[2] + ' ' + start[3] + ':' + start[4];
       if (event.end) {
-        var end = String(event.end._d).split(' ');
-        var end_time = end[3] + '-' + get_month(end[1]) + '-' + end[2] + ' ' + end[4];
+        var end = []
+        end.push(event.end._d.getUTCFullYear());
+        end.push(event.end._d.getUTCMonth() + 1);
+        end.push(event.end._d.getUTCDate());
+        end.push(event.end._d.getUTCHours());
+        end.push(event.end._d.getUTCMinutes());
+        var end_time = end[0] + '-' + end[1] + '-' + end[2] + ' ' + end[3] + ':' + end[4];
       }
       var data = {
         event: {
@@ -35,8 +39,6 @@ $(document).on('turbolinks:load', function() {
           end: end_time,
         }
       };
-
-      console.log(start);
 
       $.ajax({
         type: 'PATCH',
