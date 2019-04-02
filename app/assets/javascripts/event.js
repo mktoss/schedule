@@ -16,6 +16,27 @@ $(document).on('turbolinks:load', function() {
     eventClick: function(event) {
       location.href = `/projects/${event.project_id}/events/${event.id}`
     },
+    eventResize: function(event) {
+      var end = []
+      end.push(event.end._d.getUTCFullYear());
+      end.push(event.end._d.getUTCMonth() + 1);
+      end.push(event.end._d.getUTCDate());
+      end.push(event.end._d.getUTCHours());
+      end.push(event.end._d.getUTCMinutes());
+      var end_time = end[0] + '-' + end[1] + '-' + end[2] + ' ' + end[3] + ':' + end[4];
+      var data = {
+        event: {
+          end: end_time,
+        }
+      };
+
+      $.ajax({
+        type: 'PATCH',
+        url:  `/projects/${event.project_id}/events/${event.id}`,
+        data: data,
+        dataType: 'json'
+      })
+    },
     eventDrop: function(event) {
       var start = []
       start.push(event.start._d.getUTCFullYear());
@@ -44,6 +65,7 @@ $(document).on('turbolinks:load', function() {
         type: 'PATCH',
         url:  `/projects/${event.project_id}/events/${event.id}`,
         data: data,
+        dataType: 'json'
       })
     },
   });
