@@ -28,13 +28,13 @@
     .col-md-2
       = f.label :start
     .col-md-10
-      = f.datetime_select :start, minute_step: 10
+      = f.datetime_select :start, { default: Time.now.round, minute_step: 10 }
 
   .row.mb-2
     .col-md-2
       = f.label :end
     .col-md-10
-      = f.datetime_select :end, minute_step: 10
+      = f.datetime_select :end, { default: Time.now.round + 3600, minute_step: 10 }
 
   .row.mb-2
     .col-md-2.my-auto

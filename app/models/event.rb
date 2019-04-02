@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  before_save :remove_time
+
   belongs_to :project
   belongs_to :user
 
@@ -16,4 +18,11 @@ class Event < ApplicationRecord
     "#7fbfff",
     "#ffbf7f",
   ]
+
+  def remove_time
+    if self.all_day == true
+      self.start = self.start.to_s.split(" ").shift
+      self.end = self.end.to_s.split(" ").shift
+    end
+  end
 end
