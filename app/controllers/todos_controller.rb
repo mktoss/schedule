@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
   before_action :set_project
   before_action :project_member?
+  before_action :set_search, only: [:executed, :edit]
 
   def executed
     @events = @project.events.get_executed
@@ -32,5 +33,9 @@ class TodosController < ApplicationController
     unless @project.users.include?(current_user)
       redirect_to root_path
     end
+  end
+
+  def set_search
+    @q = @project.events.includes(:user).with_keywords(params.dig(:q, :keywords)).ransack(params[:q])
   end
 end

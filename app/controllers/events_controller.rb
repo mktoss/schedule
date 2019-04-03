@@ -2,9 +2,11 @@ class EventsController < ApplicationController
   before_action :set_project
   before_action :project_member?
   before_action :set_event, only: [:show, :update, :destroy]
+  before_action :set_search, only: [:search, :index, :show]
 
   def search
-    @events = @project.events.includes(:user).search_event(search_params)
+    @events_count = @q.result.count
+    @events = @q.result.page(params[:page]).per(15)
   end
 
   def index
@@ -47,10 +49,6 @@ class EventsController < ApplicationController
 
   private
 
-  def search_params
-    params.permit(:keyword)[:keyword]
-  end
-
   def event_params
     params.require(:event).permit(:title, :all_day, :start, :end, :address, :color, :memo).merge(user_id: current_user.id)
   end
@@ -67,5 +65,9 @@ class EventsController < ApplicationController
     unless @project.users.include?(current_user)
       redirect_to root_path
     end
+  end
+
+  def set_search
+    @q = @project.events.includes(:user).with_keywords(params.dig(:q, :keywords)).ransack(params[:q])
   end
 end
