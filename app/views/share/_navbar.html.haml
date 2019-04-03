@@ -10,7 +10,7 @@
         = "Member(#{project.users.count})"
         - project.users.each do |user|
           = user.name
-    %form.form-inline.my-2.my-lg-0
+    = form_tag search_project_events_path(project), method: :get, class: "form-inline my-2 my-lg-0" do
       = link_to "TODO", edit_project_todos_path(project), class: "btn btn-outline-info mr-2"
-      %input.form-control.mr-sm-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
-      %button.btn.btn-outline-success.my-2.my-sm-0{type: "submit"} Search
+      = text_field_tag :keyword, "", class: "form-control mr-sm-2", placeholder: "Search"
+      = submit_tag "Search", class: "btn btn-outline-success my-2 my-sm-0"

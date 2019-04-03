@@ -1,0 +1,16 @@
+= render 'share/navbar', project: @project
+
+.container.mt-3
+  .row
+    .col-md-3
+      %h3
+        検索結果
+    .col-md-3
+      = link_to "カレンダーに戻る", project_events_path(@project), class: 'btn btn-outline-secondary float-right'
+  .row
+    .col-md-6
+      = "件数: #{@events.count}"
+
+  .row
+    .col-md-6
+      = render @events
