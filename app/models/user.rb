@@ -12,5 +12,5 @@ class User < ApplicationRecord
 
   scope :remove_current_user, -> current_user { where.not(id: current_user) }
   scope :remove_member, -> user_ids { where.not(id: user_ids) }
-  scope :get_user, -> keyword { where(name: keyword) }
+  scope :search_user, -> keyword { where(name: keyword) }
 end

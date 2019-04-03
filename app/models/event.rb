@@ -8,6 +8,14 @@ class Event < ApplicationRecord
 
   scope :get_todo, -> { where(all_day: "true").where(todo: "false") }
   scope :get_executed, -> { where(all_day: "true").where(todo: "true") }
+  scope :with_keywords, -> keywords {
+    if keywords.present?
+      columns = [:title, :address, :memo]
+      where(keywords.split(/[[:space:]]/).reject(&:empty?).map {|keyword|
+        columns.map { |a| arel_table[a].matches("%#{keyword}%") }.inject(:or)
+      }.inject(:and))
+    end
+  }
 
   enum color: [
     "#ff7f7f",
