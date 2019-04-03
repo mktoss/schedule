@@ -7,9 +7,14 @@
         検索結果
     .col
       = link_to "カレンダーに戻る", project_events_path(@project), class: 'btn btn-outline-secondary float-right'
+
   .row
     .col
-      = "件数: #{@events.count}"
+      = "件数: #{@events_count}"
+
+  .row
+    .col
+      = paginate @events
 
   .row
     .col
