@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
 
   def search
-    @events = @project.events.search_event(search_params)
+    @events = @project.events.includes(:user).search_event(search_params)
   end
 
   def index
