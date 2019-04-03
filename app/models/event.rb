@@ -8,6 +8,7 @@ class Event < ApplicationRecord
 
   scope :get_todo, -> { where(all_day: "true").where(todo: "false") }
   scope :get_executed, -> { where(all_day: "true").where(todo: "true") }
+  scope :search_event, -> keyword { where("title LIKE(?)", "#{keyword}%").order(start: "DESC") }
 
   enum color: [
     "#ff7f7f",
