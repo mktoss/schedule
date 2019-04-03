@@ -1,5 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_project
+  before_action :project_member?
 
   def executed
     @events = @project.events.get_executed
@@ -25,5 +26,11 @@ class TodosController < ApplicationController
 
   def set_project
     @project = Project.find(params[:project_id])
+  end
+
+  def project_member?
+    unless @project.users.include?(current_user)
+      redirect_to root_path
+    end
   end
 end
