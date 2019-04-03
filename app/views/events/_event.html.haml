@@ -1,14 +1,16 @@
 = link_to project_event_path(@project, event) do
   .row.mt-1.rounded.text-body{ style: "line-height:38px; background-color: #{event.color};" }
-    .col-md-4
+    .col-md-3
       = event.title
     - if event.all_day == true
-      .col-md-4
+      .col-md-3
         = event.start.strftime('%Y/%m/%d')
-      .col-md-4
+      .col-md-3
         = "~ #{event.end.strftime('%Y/%m/%d')}"
     - else
-      .col-md-4
+      .col-md-3
         = event.start.strftime('%Y/%m/%d %H:%M')
-      .col-md-4
+      .col-md-3
         = "~ #{event.end.strftime('%Y/%m/%d %H:%M')}"
+    .col-md-3
+      = "作成者: #{event.user.name}"

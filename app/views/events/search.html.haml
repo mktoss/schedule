@@ -2,15 +2,15 @@
 
 .container.mt-3
   .row
-    .col-md-3
+    .col
       %h3
         検索結果
-    .col-md-3
+    .col
       = link_to "カレンダーに戻る", project_events_path(@project), class: 'btn btn-outline-secondary float-right'
   .row
-    .col-md-6
+    .col
       = "件数: #{@events.count}"
 
   .row
-    .col-md-6
+    .col
       = render @events
