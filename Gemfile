@@ -73,6 +73,8 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
+gem 'ransack'
+gem 'kaminari'
 
 group :production do
   gem 'pg', '0.20.0'
