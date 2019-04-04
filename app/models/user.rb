@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :project_users
   has_many :projects, through: :project_users
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true, length: { maximum: 12 }
 
   scope :remove_current_user, -> current_user { where.not(id: current_user) }
   scope :remove_member, -> user_ids { where.not(id: user_ids) }
