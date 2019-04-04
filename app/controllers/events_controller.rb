@@ -62,9 +62,7 @@ class EventsController < ApplicationController
   end
 
   def project_member?
-    unless @project.users.include?(current_user)
-      redirect_to root_path
-    end
+    redirect_to root_path unless @project.users.include?(current_user)
   end
 
   def set_search
