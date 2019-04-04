@@ -4,7 +4,7 @@ json.array! @events do |event|
   json.title           event.title
   json.allDay          event.all_day
   json.start           event.start
-  json.end             event.end
+  json.end             event.end_time
   json.backgroundColor event.color
   json.borderColor     event.color
 end

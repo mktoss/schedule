@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_052749) do
+ActiveRecord::Schema.define(version: 2019_04_03_111246) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.boolean "all_day", default: false, null: false
     t.datetime "start"
-    t.datetime "end"
+    t.datetime "end_time"
     t.string "address"
     t.integer "color", default: 0
     t.text "memo"

@@ -6,11 +6,11 @@
       .col-md-3
         = event.start.strftime('%Y/%m/%d')
       .col-md-3
-        = "~ #{event.end.strftime('%Y/%m/%d')}"
+        = "~ #{event.end_time.strftime('%Y/%m/%d')}"
     - else
       .col-md-3
         = event.start.strftime('%Y/%m/%d %H:%M')
       .col-md-3
-        = "~ #{event.end.strftime('%Y/%m/%d %H:%M')}"
+        = "~ #{event.end_time.strftime('%Y/%m/%d %H:%M')}"
     .col-md-3
       = "作成者: #{event.user.name}"
