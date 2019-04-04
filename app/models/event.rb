@@ -17,7 +17,7 @@ class Event < ApplicationRecord
     end
   }
 
-  enum color: [
+  enum bar_color: [
     "#ff7f7f",
     "#ff7fbf",
     "#ff7fff",

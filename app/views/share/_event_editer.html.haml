@@ -51,9 +51,9 @@
     .col-md-2
       = f.label :color
     .col-md-10
-      - Event.colors.keys.each do |key|
+      - Event.bar_colors.keys.each do |key|
         .col-md-12.mb-1{ style: "background-color: #{key};" }
-          = f.radio_button :color, key
+          = f.radio_button :bar_color, key
   .row.mb-2
     .col-md-2
       = f.label :memo

@@ -1,5 +1,5 @@
 = link_to project_event_path(@project, event) do
-  .row.mt-1.rounded.text-body{ style: "line-height:38px; background-color: #{event.color};" }
+  .row.mt-1.rounded.text-body{ style: "line-height:38px; background-color: #{event.bar_color};" }
     .col-md-3
       = event.title
     - if event.all_day == true

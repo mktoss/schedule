@@ -13,7 +13,7 @@
 
         - @events.each do |event|
           = fields_for "events[]", event do |fi|
-            .col.pt-1.rounded.border-bottom{ style: "height:38px; background-color: #{event.color};"}
+            .col.pt-1.rounded.border-bottom{ style: "height:38px; background-color: #{event.bar_color};"}
               = fi.check_box :todo, {}, "true", "false"
               = link_to project_event_path(@project, event), class: "ml-1 text-body" do
                 = event.title

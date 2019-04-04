@@ -5,6 +5,6 @@ json.array! @events do |event|
   json.allDay          event.all_day
   json.start           event.start
   json.end             event.end_time
-  json.backgroundColor event.color
-  json.borderColor     event.color
+  json.backgroundColor event.bar_color
+  json.borderColor     event.bar_color
 end
