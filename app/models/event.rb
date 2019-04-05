@@ -17,7 +17,7 @@ class Event < ApplicationRecord
     end
   }
 
-  enum color: [
+  enum bar_color: [
     "#ff7f7f",
     "#ff7fbf",
     "#ff7fff",
@@ -30,7 +30,7 @@ class Event < ApplicationRecord
   def remove_time
     if self.all_day == true
       self.start = self.start.to_s.split(" ").shift
-      self.end = self.end.to_s.split(" ").shift
+      self.end_time = self.end_time.to_s.split(" ").shift
     end
   end
 end

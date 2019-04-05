@@ -25,10 +25,10 @@ $(document).on('turbolinks:load', function() {
       end.push(event.end._d.getUTCDate());
       end.push(event.end._d.getUTCHours());
       end.push(event.end._d.getUTCMinutes());
-      var end_time = end[0] + '-' + end[1] + '-' + end[2] + ' ' + end[3] + ':' + end[4];
+      var endTime = end[0] + '-' + end[1] + '-' + end[2] + ' ' + end[3] + ':' + end[4];
       var data = {
         event: {
-          end: end_time,
+          end_time: endTime,
         }
       };
 
@@ -47,7 +47,7 @@ $(document).on('turbolinks:load', function() {
       start.push(event.start._d.getUTCDate());
       start.push(event.start._d.getUTCHours());
       start.push(event.start._d.getUTCMinutes());
-      var start_time = start[0] + '-' + start[1] + '-' + start[2] + ' ' + start[3] + ':' + start[4];
+      var startTime = start[0] + '-' + start[1] + '-' + start[2] + ' ' + start[3] + ':' + start[4];
       if (event.end) {
         var end = []
         end.push(event.end._d.getUTCFullYear());
@@ -55,13 +55,13 @@ $(document).on('turbolinks:load', function() {
         end.push(event.end._d.getUTCDate());
         end.push(event.end._d.getUTCHours());
         end.push(event.end._d.getUTCMinutes());
-        var end_time = end[0] + '-' + end[1] + '-' + end[2] + ' ' + end[3] + ':' + end[4];
+        var endTime = end[0] + '-' + end[1] + '-' + end[2] + ' ' + end[3] + ':' + end[4];
       }
       var data = {
         event: {
           all_day : event.allDay,
-          start:    start_time,
-          end:      end_time,
+          start:    startTime,
+          end_time: endTime,
         }
       };
 

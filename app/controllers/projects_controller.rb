@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:edit, :update, :destroy]
+  before_action :project_member?, only: [:edit, :update, :destroy]
 
   def index
   end
@@ -42,5 +43,9 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
+  end
+
+  def project_member?
+    redirect_to root_path unless @project.users.include?(current_user)
   end
 end

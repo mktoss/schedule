@@ -50,7 +50,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :all_day, :start, :end, :address, :color, :memo).merge(user_id: current_user.id)
+    params.require(:event).permit(:title, :all_day, :start, :end_time, :address, :bar_color, :memo).merge(user_id: current_user.id)
   end
 
   def set_project
@@ -62,9 +62,7 @@ class EventsController < ApplicationController
   end
 
   def project_member?
-    unless @project.users.include?(current_user)
-      redirect_to root_path
-    end
+    redirect_to root_path unless @project.users.include?(current_user)
   end
 
   def set_search
