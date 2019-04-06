@@ -2,20 +2,35 @@
 
 .container.mt-3
   .row
-    .col
-      %h3
-        検索結果
-    .col
-      = link_to "カレンダーに戻る", project_events_path(@project), class: 'btn btn-outline-secondary float-right'
+    .col-md-3
+      = search_form_for @q, url: search_project_events_path(@project), class: "form-inline my-2 my-lg-0" do |f|
+        = f.label :keywords
+        = f.text_field :keywords, required: false, value: params.dig(:q, :keywords), placeholder: "キーワード検索", class: "form-control mb-1", style: "width: 100%;"
+        = f.label :color
+        - Event.bar_colors.keys.each do |key|
+          .col-md-12.mb-1.rounded{ style: "background-color: #{key}; line-height: 38px;" }
+            = f.check_box :bar_color, { multiple: true }, key, nil
+        = f.label :member
+        - @project.users.each do |user|
+          .col-md-12.mb-1.border-bottom{ style: "line-height: 38px;" }
+            = f.check_box :user_id, { multiple: true }, user.id, nil
+            = user.name
+        = f.button :search, class: "btn-block btn-outline-success my-2 my-sm-0 rounded", style: "line-height: 38px;"
 
-  .row
-    .col
-      = "件数: #{@events_count}"
+    .col-md-9
+      .row
+        .col
+          %h3
+            検索結果
+        .col
+          = link_to "カレンダーに戻る", project_events_path(@project), class: 'btn btn-outline-secondary float-right'
 
-  .row
-    .col
-      = paginate @events
+      .row
+        .col
+          = "件数: #{@events_count}"
 
-  .row
-    .col
       = render @events
+
+      .row.mt-1
+        .col
+          = paginate @events
