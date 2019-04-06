@@ -6,8 +6,15 @@ class EventsController < ApplicationController
   before_action :update_visit_time
 
   def search
-    @events_count = @q.result.count
-    @events = @q.result.page(params[:page]).per(15)
+    search_result = @q.result
+    if params[:q][:bar_color]
+      search_result = search_result.where(bar_color: params[:q][:bar_color])
+    end
+    if params[:q][:user_id]
+      search_result = search_result.where(user_id: params[:q][:user_id])
+    end
+    @events_count = search_result.count
+    @events = search_result.page(params[:page]).per(15)
   end
 
   def index

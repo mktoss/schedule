@@ -9,7 +9,9 @@ RSpec.describe EventsController, type: :controller do
 
   describe '#search' do
     subject do
-      get :search, params: { project_id: project.id }
+      get :search, params: {
+        project_id: project.id, q: { keywords: "" }
+      }
     end
 
     context 'login' do
