@@ -24,5 +24,6 @@
                 - else
                   = "#{project_user.project.events.where('created_at > ?', project_user.visit_time).count}件の新しい予定があります"
         .col-md-3.my-auto.float-right
-          = link_to "編集", edit_project_path(project_user.project), class: 'btn-sm btn-secondary'
-          = link_to "削除", project_path(project_user.project), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn-sm btn-danger ml-1'
+          - if project_user.project.owner_id == current_user.id
+            = link_to "編集", edit_project_path(project_user.project), class: 'btn-sm btn-secondary'
+            = link_to "削除", project_path(project_user.project), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn-sm btn-danger ml-1'
