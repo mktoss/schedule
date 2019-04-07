@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
   let!(:user)    { create(:user) }
-  let!(:project) { create(:project, user_ids: [user.id]) }
+  let!(:project) { create(:project, user_ids: [user.id], owner_id: user.id) }
   let!(:event)   {
     create(:event, project_id: project.id, user_id: user.id)
   }
