@@ -28,10 +28,11 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = @project.events.new(event_params)
+    @event = @project.events.new(event_params_for_create)
     if @event.save
       redirect_to project_events_path(@project)
     else
+      set_search
       @events = @project.events
       render :index
     end
@@ -45,6 +46,7 @@ class EventsController < ApplicationController
       end
     else
       set_event
+      set_search
       @events = @project.events
       render :index
     end
@@ -57,8 +59,12 @@ class EventsController < ApplicationController
 
   private
 
-  def event_params
+  def event_params_for_create
     params.require(:event).permit(:title, :all_day, :start, :end_time, :address, :bar_color, :memo).merge(user_id: current_user.id)
+  end
+
+  def event_params
+    params.require(:event).permit(:title, :all_day, :start, :end_time, :address, :bar_color, :memo)
   end
 
   def set_project
