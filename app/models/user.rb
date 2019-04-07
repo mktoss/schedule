@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :events
   has_many :project_users
   has_many :projects, through: :project_users
+  has_many :my_project, foreign_key: 'owner_id', class_name: 'Project'
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 12 }
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
   let!(:user)    { create(:user) }
-  let!(:project) { create(:project, user_ids: [user.id]) }
+  let!(:project) { create(:project, user_ids: [user.id], owner_id: user.id) }
 
   describe '#index' do
     subject do
@@ -111,10 +111,22 @@ RSpec.describe ProjectsController, type: :controller do
 
     context 'login' do
       context 'project member' do
-        it 'ページが表示される' do
-          login(user)
-          subject
-          expect(response).to render_template(:edit)
+        context 'project owner' do
+          it 'ページが表示される' do
+            login(user)
+            subject
+            expect(response).to render_template(:edit)
+          end
+        end
+
+        context 'not project owner' do
+          it 'ホームが表示される' do
+            another_user = create(:user, name: 'another', email: 'another@mail')
+            login(another_user)
+            another_project = create(:project, user_ids: [user.id, another_user.id], owner_id: user.id)
+            get :edit, params: { id: another_project.id }
+            expect(response).to redirect_to(root_path)
+          end
         end
       end
 
@@ -149,25 +161,43 @@ RSpec.describe ProjectsController, type: :controller do
 
     context 'login' do
       context 'project member' do
-        context '成功' do
-          it 'ホームが表示される' do
-            login(user)
-            subject
-            expect(response).to redirect_to(root_path)
+        context 'project owner' do
+          context '成功' do
+            it 'ホームが表示される' do
+              login(user)
+              subject
+              expect(response).to redirect_to(root_path)
+            end
+          end
+
+          context '失敗' do
+            it '#editページが表示される' do
+              login(user)
+                patch :update, params: {
+                  id: project.id,
+                  project: {
+                    name:     '',
+                    user_ids: [user.id]
+                  }
+                }
+              expect(response).to render_template(:edit)
+            end
           end
         end
 
-        context '失敗' do
-          it '#editページが表示される' do
-            login(user)
-              patch :update, params: {
-                id: project.id,
-                project: {
-                  name:     '',
-                  user_ids: [user.id]
-                }
+        context 'not project owner' do
+          it 'ホームが表示される' do
+            another_user = create(:user, name: 'another', email: 'another@mail')
+            login(another_user)
+            another_project = create(:project, user_ids: [user.id, another_user.id], owner_id: user.id)
+            patch :update, params: {
+              id: another_project.id,
+              project: {
+                name:     'name',
+                user_ids: [user.id, another_user.id]
               }
-            expect(response).to render_template(:edit)
+            }
+            expect(response).to redirect_to(root_path)
           end
         end
       end
@@ -198,15 +228,27 @@ RSpec.describe ProjectsController, type: :controller do
 
     context 'login' do
       context 'project member' do
-        it 'ページが表示される' do
-          login(user)
-          subject
-          expect(response).to redirect_to(root_path)
+        context 'project owner' do
+          it 'ページが表示される' do
+            login(user)
+            subject
+            expect(response).to redirect_to(root_path)
+          end
+
+          it 'レコード数が減る' do
+            login(user)
+            expect { subject }.to change(Project, :count).by(-1)
+          end
         end
 
-        it 'レコード数が減る' do
-          login(user)
-          expect { subject }.to change(Project, :count).by(-1)
+        context 'not project owner' do
+          it 'ホームが表示される' do
+            another_user = create(:user, name: 'another', email: 'another@mail')
+            login(another_user)
+            another_project = create(:project, user_ids: [user.id, another_user.id], owner_id: user.id)
+            get :destroy, params: { id: another_project.id }
+            expect(response).to redirect_to(root_path)
+          end
         end
       end
 

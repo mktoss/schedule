@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'schedule', type: :feature do
   scenario 'post event' do
     user = create(:user)
-    project = create(:project, name: 'フィーチャー', user_ids: [user.id])
+    project = create(:project, name: 'フィーチャー', user_ids: [user.id], owner_id: user.id)
 
     # login
     visit new_user_session_path

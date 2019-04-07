@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:edit, :update, :destroy]
   before_action :project_member?, only: [:edit, :update, :destroy]
+  before_action :project_owner?, only: [:edit, :update, :destroy]
 
   def index
   end
@@ -11,6 +12,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.owner_id = current_user.id
     @project.users << current_user
     if @project.save
       redirect_to root_path
@@ -47,5 +49,9 @@ class ProjectsController < ApplicationController
 
   def project_member?
     redirect_to root_path unless @project.users.include?(current_user)
+  end
+
+  def project_owner?
+    redirect_to root_path unless @project.owner_id == current_user.id
   end
 end
