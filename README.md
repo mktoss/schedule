@@ -36,7 +36,7 @@
 - カレンダーを共有するユーザーの追加・削除
 
 ## プロジェクトページ
-![](https://gyazo.com/bb148bbb48e02bacb19af2b43fc94008.png "プロジェクトページ月")
+![](https://gyazo.com/98545349c7dc146c76ac0ea988debf7f.png "プロジェクトページ月")
 ![](https://gyazo.com/8282634d0b0bbad28e54f0d0a3c1bbde.png "プロジェクトページ週")
 ![](https://gyazo.com/f00ba90be67d3df45466109b19b29cb6.png "プロジェクトページ日")
 
