@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to root_path
     else
+      @project.users.clear
       render :new
     end
   end

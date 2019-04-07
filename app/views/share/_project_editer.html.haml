@@ -18,8 +18,9 @@
                 .col.ml-3{ style: "line-height: 38px;" }
                   = user.name
                 .col
-                  .btn.btn-outline-danger.float-right{ id: "user-remove" }
-                    除外
+                  - unless user.id == current_user.id
+                    .btn.btn-outline-danger.float-right{ id: "user-remove" }
+                      除外
 
         .row
           .col-md-6
