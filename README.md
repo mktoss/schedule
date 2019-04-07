@@ -1,24 +1,82 @@
-# README
+# 各画面の説明
+## ログイン・サインインページ
+![](https://gyazo.com/de19532f5c80ad52887006cafbf78c5b.png "ログインページ")
+![](https://gyazo.com/cd08bd5057f6069a618e6007328651ee.png "サインインページ")
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### function
+- ログイン
+- サインインページへのリンク
+- サインイン
+- ログインページへのリンク
 
-Things you may want to cover:
+### note
+各ページでログインしていない場合、ログインページにリダイレクトされます。
 
-* Ruby version
+## プロジェクト一覧ページ
+![](https://gyazo.com/a53e6ea454a0a131c915039f7de257b0.png "プロジェクト一覧ページ")
 
-* System dependencies
+### function
+- ユーザー名表示
+- ログアウト
+- 各プロジェクトへのリンク
+- プロジェクト作成・編集ページへのリンク
+- プロジェクトの削除
+- 新着イベント数の表示
 
-* Configuration
+### note
+自分が所属するプロジェクトのみ表示されます。
+所属していないプロジェクトのページに遷移しようとすると、このページにリダイレクトされます。
 
-* Database creation
+## プロジェクト作成・編集ページ
+![](https://gyazo.com/ca97f4404defa464d3080adb5a7d2d3c.png "プロジェクト作成ページ")
+![](https://gyazo.com/c1ae42f83a3bc4bbe6a68dbe57731e5d.png "プロジェクト編集ページ")
 
-* Database initialization
+### function
+- プロジェクト名の編集
+- カレンダーを共有するユーザーの追加・削除
 
-* How to run the test suite
+## プロジェクトページ
+![](https://gyazo.com/bb148bbb48e02bacb19af2b43fc94008.png "プロジェクトページ月")
+![](https://gyazo.com/8282634d0b0bbad28e54f0d0a3c1bbde.png "プロジェクトページ週")
+![](https://gyazo.com/f00ba90be67d3df45466109b19b29cb6.png "プロジェクトページ日")
 
-* Services (job queues, cache servers, search engines, etc.)
+### function
+- プロジェクト一覧ページへのリンク
+- TODOページへのリンク
+- イベント検索ページへのリンク
+- プロジェクト名の表示
+- メンバー数の表示
+- 各ユーザー名の表示
+- 月ごと・週ごと・日ごとのカレンダーの表示
+- ドラッグ＆ドロップによるイベントの移動・終了時間の編集
+- イベントの追加・編集・削除
+> - イベント名の設定
+> - 開始日時・終了日時・終日の設定
+> - 場所の設定
+> - ラベルカラーの設定
+> - メモの記入
 
-* Deployment instructions
+### note
+イベントを終日に設定するとTODOページにも表示されます。
+場所を設定している場合、Google Mapが表示されます。
 
-* ...
+## TODOページ
+![](https://gyazo.com/b064185bdbc5facb0882288b2f04b7d2.png "未実行リスト")
+![](https://gyazo.com/7829cb9fd772d3810d5a13fdac1fc7d0.png "実行済みリスト")
+
+### function
+- カレンダーへのリンク
+- 未実行・実行済みリストへのリンク
+
+## イベント検索ページ
+![](https://gyazo.com/870de3dda37d25e6591298efb53d1f1b.png "イベント検索ページ")
+
+### function
+- キーワード検索（イベント名、場所、メモ）
+- 絞り込み検索（ラベルカラー、ユーザー名）
+- ページネーション
+
+### note
+半角スペースで区切ることで複数ワードで検索することができます。
+15件ごとにページが区切れられます。
+
